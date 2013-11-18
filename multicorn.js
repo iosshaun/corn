@@ -2,7 +2,6 @@ var eb = require("vertx/event_bus");
 var console = require("vertx/console");
 var vertx = require("vertx");
 
-
 /*
  * Send the url param value on the EB and disply the reply
  * eg) http://localhost:8080/?shaun
