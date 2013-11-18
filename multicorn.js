@@ -16,6 +16,7 @@ eb.send('unicorn', 'shaun' , function(r) {
 vertx.createHttpServer().requestHandler(function(request) {
         var word = request.uri();
         word = word.substring(2);
+        word = decodeURI(word);
         eb.send('unicorn', word , function(r) {
                 console.log("WebServer call matched: " + r);                
                 request.response.end(r);
