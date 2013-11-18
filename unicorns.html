@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" ng-app="unicorns">
+<head>
+    <meta charset="utf-8">
+    <script src="http://code.angularjs.org/1.2.0/angular.min.js" type="text/javascript"></script>
+
+
+    <script>
+        angular.module('unicorns', [])
+                .controller('Ctrl', function($scope, $http) {
+                    $scope.unicorns = "";
+                    $scope.corn = "";
+
+                    $scope.$watch('corn', function(newVal) {
+                        if (newVal) { $scope.search(); }
+                    })
+
+                    $scope.search = function(){
+                        var path = "http://192.168.5.30:8080/?"+$scope.corn;
+                            $http.get(path)
+                                    .success(function (data) {
+                                        $scope.unicorns = data.toString();
+                                        console.log("SUCCESS: "+data.toString());
+                                    })
+                                    .error(function (data) {
+                                         console.log("ERROR: "+data.toString());
+                                         $scope.unicorns = data.toString();
+                                    });
+
+                    }
+                });
+
+    </script>
+
+    <script>
+        function foo(){
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function(){
+                if (http.readyState==4 && http.status==200){
+                    alert(http.responseText);
+                }
+            }
+
+            http.open("GET", "http://192.168.5.30:8080/?shaun", true);
+            http.send();
+        }
+    </script>
+
+
+</head>
+<body>
+<div ng-controller="Ctrl">
+
+     <span onclick="foo();"> Hark! Unicorns! {{ unicorns }}</span>
+        <form>
+          <input type="text" ng-model="corn" />
+        </form>
+ </div>
+</body>
+</html>
