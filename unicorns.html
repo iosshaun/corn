@@ -16,7 +16,8 @@
                     })
 
                     $scope.search = function(){
-                        var path = "http://192.168.5.30:8080/search";
+                        //var path = "http://192.168.5.30:8080/search";
+                        var path = "search";   
                             $http.get(path+"/"+$scope.corn)
                                     .success(function (data) {
                                         $scope.unicorns = data.toString();
@@ -41,7 +42,8 @@
                 }
             }
 
-            http.open("GET", "http://192.168.5.30:8080/search/shaun", true);
+            //http.open("GET", "http://192.168.5.30:8080/search/shaun", true);
+            http.open("GET", "search/shaun", true);        
             http.send();
         }
     </script>
