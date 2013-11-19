@@ -115,6 +115,7 @@ function findMatches(structure, word){
     for (var i = 0; i < word.length; i++) {
         var c = word.charAt(i);
         if (node[c] == null || node[c] == undefined) {
+            console.log('breaking at char: '+c);
             break;
         } else {
             _matches = node[c]._;
@@ -125,8 +126,10 @@ function findMatches(structure, word){
     for (var j = 0; j < _matches.length; j++) {
         var m = tids[_matches[j]];
         console.log('matched: ' + m);
-        if (m.length >= word.length)
-            matches[j] = m;
+        //if (m.length >= word.length)
+        //if (m.length >= word.length && m.charAt(word.length-1) == word.charAt(word.length-1) )
+        if (m.indexOf(word) == 0)
+            matches.push(m);
     }
     return matches;
 }

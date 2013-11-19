@@ -20,12 +20,12 @@
                         var path = "search";   
                             $http.get(path+"/"+$scope.corn)
                                     .success(function (data) {
-                                        $scope.unicorns = data.toString();
+                                        $scope.unicorns = ""+data.toString();
                                         console.log("SUCCESS: "+data.toString());
                                     })
                                     .error(function (data) {
                                          console.log("ERROR: "+data.toString());
-                                         $scope.unicorns = data.toString();
+                                         $scope.unicorns = ""+data.toString();
                                     });
 
                     }
@@ -55,9 +55,38 @@
 
      <span onclick="foo();"> Hark! Unicorns!</span>
         <form>
-          <input type="text" ng-model="corn" />
+          Find! <input type="text" ng-model="corn" />
         </form>
      <span>{{ unicorns }}</span>
+
+<p>
+
+
+`List all unicorns`
+<BR>
+<a href="http://192.168.5.30:8080/list">http://192.168.5.30:8080/list</a>
+
+<BR>
+
+`Search for unicorns starting with: shaun`
+<BR>
+<a href="http://192.168.5.30:8080/search/shaun">http://192.168.5.30:8080/search/shaun</a>
+
+<BR>
+
+`Add a unicorn`<BR>
+<a href="http://192.168.5.30:8080/add/item">http://192.168.5.30:8080/add/item</a>
+
+<BR>
+
+`This page`
+<BR>
+<a href="http://192.168.5.30:8080">http://192.168.5.30:8080</a>
+<BR>
+
+</p>
+
+
  </div>
 </body>
 </html>
