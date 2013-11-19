@@ -12,10 +12,11 @@ eb.registerHandler('unicornication', function(word, f) {
 
 eb.registerHandler('unicornholio', function(word, f) {
         console.log('Received: ' + word);
-        // Now reply to it
-        tids[tids.length] = word;
-        build();        
-        f("Added: "+word);
+        // Now reply to it        
+        var added = add(word);
+        if (added) build();        
+        if (added) f("Added: "+word);
+        else f("Word Exists: "+word);
     });
 
 
@@ -31,11 +32,20 @@ var tids = [];
 tids[0] = "uni";
 tids[1] = "unicorn";
 tids[2] = "unicron";
-tids[3] = "shaun ethe";
-tids[4] = "shaun gray";
-tids[5] = "linda";
+tids[3] = "shaun etherton";
+tids[4] = "shaun the sheep";
+tids[5] = "lister";
 tids[6] = "linker";
 var structure;
+
+function add(word){
+    var sorted = tids;
+    for(var i=0; i<sorted.length; i++){
+        if (tids[i] == word) return false;
+    }
+    tids[tids.length] = word;
+    return true;
+}
 
 function list(){
     tids.sort();
@@ -98,7 +108,7 @@ function build(){
 
 }//end build
     
-    //search function to match a word in a structure
+//search function to match a word in a structure
 function findMatches(structure, word){
     var node = structure;
     var _matches = [];
@@ -130,8 +140,9 @@ findMatches(structure, 'unicr');
 findMatches(structure, 'unicor');
 findMatches(structure, 'shaun');
 findMatches(structure, 'shaun e');
+findMatches(structure, 'li');
+findMatches(structure, 'lis');
 findMatches(structure, 'lin');
-findMatches(structure, 'lind');
 
 
 
