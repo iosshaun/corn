@@ -27,7 +27,7 @@ http://192.168.5.30:8080/search/shaun  `
 http://192.168.5.30:8080/list  `
 
 `Add an item`
-http://192.168.5.30:8080/add/new item  `
+http://192.168.5.30:8080/add/new%20item  `
 
 
 
