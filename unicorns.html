@@ -16,8 +16,8 @@
                     })
 
                     $scope.search = function(){
-                        var path = "http://192.168.5.30:8080/?"+$scope.corn;
-                            $http.get(path)
+                        var path = "http://192.168.5.30:8080/search";
+                            $http.get(path+$scope.corn)
                                     .success(function (data) {
                                         $scope.unicorns = data.toString();
                                         console.log("SUCCESS: "+data.toString());
@@ -41,7 +41,7 @@
                 }
             }
 
-            http.open("GET", "http://192.168.5.30:8080/?shaun", true);
+            http.open("GET", "http://192.168.5.30:8080/search/shaun", true);
             http.send();
         }
     </script>
@@ -51,10 +51,11 @@
 <body>
 <div ng-controller="Ctrl">
 
-     <span onclick="foo();"> Hark! Unicorns! {{ unicorns }}</span>
+     <span onclick="foo();"> Hark! Unicorns!</span>
         <form>
           <input type="text" ng-model="corn" />
         </form>
+     <span>{{ unicorns }}</span>
  </div>
 </body>
 </html>
