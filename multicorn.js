@@ -18,6 +18,10 @@ eb.send('unicorn', 'shaun' , function(r) {
 
 var routeMatcher = new vertx.RouteMatcher();
 
+routeMatcher.get("/", function(req) {
+        _handleSite(req);
+    });    
+
 
 routeMatcher.get("/list", function(req) {
         _handleList(req, true);
@@ -46,6 +50,12 @@ routeMatcher.noMatch(function(req) {
         req.response.end('Nothing matched');
     });
 
+
+
+function _handleSite(request){
+    console.log('_handleSite called.');
+    request.response.sendFile('unicorns.html'); 
+}
 
 function _handleList(request,  end){
     console.log('_handleList called.');
@@ -98,7 +108,7 @@ function _handleOptions(request, end){
         request.response.end("ok");    
 }
 
-vertx.createHttpServer().requestHandler(routeMatcher).listen(8080);
+vertx.createHttpServer().requestHandler(routeMatcher).listen(8080, '192.168.5.30');
 
 
 /*
