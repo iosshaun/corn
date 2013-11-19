@@ -2,31 +2,44 @@ var eb = require("vertx/event_bus");
 var console = require("vertx/console");
 var vertx = require("vertx");
 
-/*
- *
- * Send the url param value on the EB and disply the reply
- * eg) http://localhost:8080/?shaun
- * Sends: shaun
- *
- */
+/* web server host */
+var host = '192.168.5.30';
 
+/*
+ * pseudo test to make sure things are working as expected.
+ * Send the url param value on the EB and disply the reply
+ * Sends: shaun
+ */
 console.log('Sending default message to unicorn.')
 eb.send('unicorn', 'shaun' , function(r) {
         console.log("Matched: " + r);
     });
 
 
+/* 
+ * Router and routes
+ */
 var routeMatcher = new vertx.RouteMatcher();
 
+
+/* 
+ * Render the html page
+ */
 routeMatcher.get("/", function(req) {
         _handleSite(req);
     });    
 
 
+/* 
+ * List all the items
+ */
 routeMatcher.get("/list", function(req) {
         _handleList(req, true);
     });    
 
+/* 
+ * Add a new item
+ */
 routeMatcher.get("/add/:word", function(req) {
         var word = req.params().get("word");
         word = decodeURI(word);        
@@ -34,6 +47,9 @@ routeMatcher.get("/add/:word", function(req) {
         _handleAdd(req, word, true);
     });    
 
+/* 
+ * Search for items matching the prefix :word
+ */
 routeMatcher.get("/search/:word", function(req) {
         var word = req.params().get("word");
         word = decodeURI(word);        
@@ -41,17 +57,26 @@ routeMatcher.get("/search/:word", function(req) {
         _handleSearch(req, word, true);
     });    
 
-routeMatcher.optionsWithRegEx("/search/:word", function(req) {
+/* 
+ * Options
+ */
+//routeMatcher.optionsWithRegEx("/search/:word", function(req) {
+routeMatcher.optionsWithRegEx('/.+', function(req) {
         console.log('options route called.');
         _handleOptions(req, true);        
     });    
 
+/* 
+ * nothing matches 
+ */
 routeMatcher.noMatch(function(req) {
-        req.response.end('Nothing matched');
+        req.response.end('No route.');
     });
 
 
-
+/* 
+ * Implementation functions 
+ */
 function _handleSite(request){
     console.log('_handleSite called.');
     request.response.sendFile('unicorns.html'); 
@@ -69,7 +94,6 @@ function _handleList(request,  end){
                 request.response.end();     
         });     
 }
-
 
 function _handleAdd(request, word, end){
     console.log('_handleAdd called.');
@@ -97,7 +121,6 @@ function _handleSearch(request, word, end){
         });     
 }
 
-
 function _handleOptions(request, end){
     request.response.putHeader("Access-Control-Allow-Origin",      "*");
     request.response.putHeader("Access-Control-Allow-Methods",     "POST, GET, PUT, DELETE, OPTIONS");
@@ -108,43 +131,7 @@ function _handleOptions(request, end){
         request.response.end("ok");    
 }
 
-vertx.createHttpServer().requestHandler(routeMatcher).listen(8080, '192.168.5.30');
-
-
-/*
-vertx.createHttpServer().requestHandler(function(request) {
-
-        if (request.method() === 'OPTIONS') {
-            console.log('OPTIONS');          
-  
-            // xdom
-            // IE8 does not allow domains to be specified, just the *
-            // headers["Access-Control-Allow-Origin"] = req.headers.origin;
-            request.response.putHeader("Access-Control-Allow-Origin",      "*");
-            request.response.putHeader("Access-Control-Allow-Methods",     "POST, GET, PUT, DELETE, OPTIONS");
-            request.response.putHeader("Access-Control-Allow-Credentials", 'false');
-            request.response.putHeader("Access-Control-Max-Age",           '86400'); // 24 hours
-            request.response.putHeader("Access-Control-Allow-Headers",     "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept");            
-            request.response.end("ok");
-
-        } else {
-            console.log('GET');            
-
-            var word = request.uri();
-            word = word.substring(2);
-            word = decodeURI(word);        
-            eb.send('unicorn', word , function(r) {    
-                    console.log("unicorn service returned: " + r); 
-                    var length = (""+r).length;
-                    request.response.putHeader("Content-length", length);
-                    request.response.putHeader("Access-Control-Allow-Origin", "*"); //xdom
-                    request.response.write(""+r+"", "UTF-8");
-                    if (end == true)
-                        request.response.end();     
-                });
-            
-        }
-
-    }).listen(8080)
-
-*/
+/* 
+ * Start the server listing on the specified host 
+ */
+vertx.createHttpServer().requestHandler(routeMatcher).listen(8080, host);
