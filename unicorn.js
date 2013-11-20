@@ -36,6 +36,15 @@ tids[3] = "shaun etherton";
 tids[4] = "shaun the sheep";
 tids[5] = "lister";
 tids[6] = "linker";
+tids[7] = "abcdfeghihjklmnopqrs";
+tids[8] = "abcdfeghihjklmnop";
+tids[9] = "abcdfeghihjklm";
+tids[10] = "abcdfeghi";
+tids[11] = "abcdf";
+tids[12] = "abc";
+tids[13] = "ab";
+tids[14] = "a";
+
 var structure;
 
 function add(word){
@@ -127,8 +136,8 @@ function findMatches(structure, word){
         var m = tids[_matches[j]];
         console.log('matched: ' + m);
         //if (m.length >= word.length)
-        //if (m.length >= word.length && m.charAt(word.length-1) == word.charAt(word.length-1) )
-        if (m.indexOf(word) == 0)
+        if (m.length >= word.length && m.charAt(word.length-1) == word.charAt(word.length-1) )
+            //if (m.indexOf(word) == 0)
             matches.push(m);
     }
     return matches;

@@ -8,7 +8,16 @@ The resulting suggestions are simple rendered on the html document. No fancy HTM
 
 The list of words always remains on the server; therfore one client can add to the list and then another  
 can find the result.
-  
+
+## Live example.
+
+> http://ec2-54-252-185-58.ap-southeast-2.compute.amazonaws.com/
+
+> http://ec2-54-252-185-58.ap-southeast-2.compute.amazonaws.com/list
+
+
+
+## Arch  
 > [html ui] -> http request -> [verticle1] -> esb -> [verticle2] -> esb -> [vertical1] -> http response-> [html ui]  
     
 
