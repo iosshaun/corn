@@ -52,7 +52,8 @@ function add(word){
     for(var i=0; i<sorted.length; i++){
         if (tids[i] == word) return false;
     }
-    tids[tids.length] = word;
+    if (tids.length+1 > 20) tids = tids.splice(0,1,word);
+    else tids[tids.length] = word;
     return true;
 }
 
