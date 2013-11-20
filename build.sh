@@ -6,8 +6,11 @@ m="corn"
 z="${n}~${m}~${v}.zip"
 
 
-echo "creating module zip file $z"
 
+echo "removing module zip file $z"
+rm ${z}
+
+echo "creating module zip file $z"
 zip ${z} app.js mod.json multicorn.js unicorn.js unicorns.html README.md
 
 echo "done"
