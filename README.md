@@ -19,20 +19,6 @@ can find the result.
 >  `vertx runzip org.etherware.vertx~corn~0.1.zip -cluster -cluster-host 192.168.5.30 -conf conf.json` 
 
 
- OR  
-
-## Raw verticles  
- (use the same ip address):
-
-First run to start the indexer: 
-
->  `unicorns.sh ip_address`
-
-Then in another terminal run to start the web server: 
-
->  `multicorns.sh ip_address`
-
-
 ## Urls:  
 
 `List all items`
