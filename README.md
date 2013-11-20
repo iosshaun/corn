@@ -8,9 +8,7 @@ Runnable module with config (note -cluster-host and conf.json IP addresses shoul
   `vertx runzip org.etherware.vertx~corn~0.1.zip -cluster -cluster-host 192.168.5.30 -conf conf.json` 
 
 
-    OR   
-       
-
+ OR  
 
 Run raw veticles, using the same ip address:
 
