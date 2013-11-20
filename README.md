@@ -7,30 +7,27 @@ Runnable module with config (note -cluster-host and conf.json IP addresses shoul
 
   `vertx runzip org.etherware.vertx~corn~0.1.zip -cluster -cluster-host 192.168.5.30 -conf conf.json` 
 
-Run raw veticles:
+Run raw veticles, using the same ip address:
 
-First run: 
+First run to start the indexer: 
 
-  `unicorns.sh <IP ADDRESS>`
+  `unicorns.sh ip_address`
 
-Then in another terminal run: 
+Then in another terminal run to start the web server: 
 
-  `multicorns.sh <IP ADDRESS>`
+  `multicorns.sh ip_address`
 
-Using the same ip address for each. 
 
-View unicorns.js to view the available words in the array. You can search/autocomplete on these.  
+Relevant urls:  
 
-Open a web browser and enter the following in the url to experiment:  
+`List all items`
+http://192.168.5.30:8080/list  `
 
 `Show the search page`
 http://192.168.5.30:8080  `
 
 `Search for items with prefix shaun`
 http://192.168.5.30:8080/search/shaun  `
-
-`List all items`
-http://192.168.5.30:8080/list  `
 
 `Add an item`
 http://192.168.5.30:8080/add/new%20item  `
