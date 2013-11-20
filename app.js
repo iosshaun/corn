@@ -6,6 +6,8 @@ var container = require('vertx/container');
 var console = require("vertx/console");
 var vertx = require("vertx");
 
+var config = container.config;
+
 //var appConfig = vertx.config();
 var appConfig = {
     
@@ -14,9 +16,15 @@ var appConfig = {
     },
 
     multicornConfig: {
-        numInstances:1
+        numInstances:1,
+        host:'192.168.5.30',
+        port: 8080
     }
-}
+};
+
+appConfig = config || appConfig;
+
+console.log('config is ' + JSON.stringify(appConfig));
 
 container.deployVerticle("unicorn.js", appConfig.unicornConfig, appConfig.unicornConfig.numInstances);
 

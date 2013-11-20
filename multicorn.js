@@ -1,13 +1,22 @@
+var container = require("vertx/container");
 var eb = require("vertx/event_bus");
 var console = require("vertx/console");
 var vertx = require("vertx");
 
+var config = container.config;
+
 //todo from config.
 /* web server host */
-var host = '192.168.5.30';
-var port = 8080;
+var appConfig = {
+    host : '192.168.5.30',
+    port : 8080
+};
 
+appConfig = config || appConfig;
+var host = appConfig.host;
+var port = appConfig.port;
 
+console.log('config is ' + JSON.stringify(appConfig));
 
 /*
  * pseudo test to make sure things are working as expected.

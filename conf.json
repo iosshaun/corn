@@ -1,0 +1,12 @@
+{
+    
+    "unicornConfig":{
+        "numInstances":1
+    },
+
+    "multicornConfig": {
+        "numInstances":1,
+        "host":"192.168.5.30",
+        "port": 8080
+    }
+}
