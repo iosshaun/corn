@@ -2,8 +2,12 @@ var eb = require("vertx/event_bus");
 var console = require("vertx/console");
 var vertx = require("vertx");
 
+//todo from config.
 /* web server host */
 var host = '192.168.5.30';
+var port = 8080;
+
+
 
 /*
  * pseudo test to make sure things are working as expected.
@@ -134,4 +138,6 @@ function _handleOptions(request, end){
 /* 
  * Start the server listing on the specified host 
  */
-vertx.createHttpServer().requestHandler(routeMatcher).listen(8080, host);
+vertx.createHttpServer().requestHandler(routeMatcher).listen(port, host);
+
+console.log(host+":"+port);

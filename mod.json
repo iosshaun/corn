@@ -1,0 +1,9 @@
+{
+
+    "main"       : "app.js",
+    "author"     : "shaun etherton",
+    "homepage"   : "https://github.com/iosshaun/corn",
+    "developers" : ["shaun etherton"],
+    "keywords"   : ["example", "auto", "complete", "suggest"],
+    "licenses"   : ["The Apache Software License Version 2.0"]
+}
