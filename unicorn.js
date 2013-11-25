@@ -2,7 +2,6 @@ var vertx = require('vertx');
 var console = require('vertx/console');
 var eb = require("vertx/event_bus");
 
-
 eb.registerHandler('unicornication', function(word, f) {
         console.log('Received: ' + word);
         var r = list();
