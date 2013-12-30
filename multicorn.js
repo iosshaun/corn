@@ -92,6 +92,7 @@ routeMatcher.noMatch(function(req) {
  */
 function _handleSite(request){
     console.log('_handleSite called.');
+    _noCache(request);
     request.response.sendFile('unicorns.html'); 
 }
 
@@ -103,6 +104,7 @@ function _handleList(request,  end){
             request.response.putHeader("Content-length", length);
             request.response.putHeader("Access-Control-Allow-Origin", "*"); //xdom
             request.response.write(""+r+"", "UTF-8");
+            _noCache(request);
             if (end == true)
                 request.response.end();     
         });     
@@ -116,6 +118,7 @@ function _handleAdd(request, word, end){
             request.response.putHeader("Content-length", length);
             request.response.putHeader("Access-Control-Allow-Origin", "*"); //xdom
             request.response.write(""+r+"", "UTF-8");
+            _noCache(request);
             if (end == true)
                 request.response.end();     
         });     
@@ -129,6 +132,7 @@ function _handleSearch(request, word, end){
             request.response.putHeader("Content-length", length);
             request.response.putHeader("Access-Control-Allow-Origin", "*"); //xdom
             request.response.write(""+r+"", "UTF-8");
+            _noCache(request);
             if (end == true)
                 request.response.end();     
         });     
@@ -140,6 +144,15 @@ function _handleOptions(request, end){
     request.response.putHeader("Access-Control-Allow-Credentials", 'false');
     request.response.putHeader("Access-Control-Max-Age",           '86400'); // 24 hours
     request.response.putHeader("Access-Control-Allow-Headers",     "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept");            
+    if (end == true)
+        request.response.end("ok");    
+}
+
+function _noCache(request, end){
+    request.response.putHeader("Cache-Control", "no-cache, no-store, must-revalidate");// // HTTP 1.1
+    request.response.putHeader("Pragma", "no-cache"); // HTTP 1.0.
+    request.response.putHeader("Expires", "0"); //proxies
+
     if (end == true)
         request.response.end("ok");    
 }
